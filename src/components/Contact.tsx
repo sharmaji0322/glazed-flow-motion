@@ -1,8 +1,65 @@
 
 import React from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
+import { useToast } from '@/hooks/use-toast';
+
+const contactFormSchema = z.object({
+  firstName: z.string().min(2, 'First name must be at least 2 characters'),
+  lastName: z.string().min(2, 'Last name must be at least 2 characters'),
+  email: z.string().email('Please enter a valid email address'),
+  subject: z.string().min(5, 'Subject must be at least 5 characters'),
+  message: z.string().min(10, 'Message must be at least 10 characters'),
+});
+
+type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 const Contact = () => {
+  const { toast } = useToast();
+  
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      firstName: '',
+      lastName: '',
+      email: '',
+      subject: '',
+      message: '',
+    },
+  });
+
+  const onSubmit = async (data: ContactFormValues) => {
+    try {
+      // Simulate API call
+      console.log('Form submitted:', data);
+      
+      // Simulate loading time
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      // Show success toast
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your message. I'll get back to you soon.",
+      });
+      
+      // Reset form
+      form.reset();
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      toast({
+        title: "Error sending message",
+        description: "Something went wrong. Please try again later.",
+        variant: "destructive",
+      });
+    }
+  };
+
   return (
     <section id="contact" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
@@ -71,61 +128,120 @@ const Contact = () => {
 
           {/* Contact Form */}
           <div className="glass rounded-2xl p-8 animate-fade-in-up" style={{ animationDelay: '0.6s' }}>
-            <form className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-white/70 text-sm mb-2">First Name</label>
-                  <input
-                    type="text"
-                    className="w-full glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300"
-                    placeholder="John"
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <FormField
+                    control={form.control}
+                    name="firstName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white/70">First Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="John"
+                            {...field}
+                            className="glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 border-0"
+                          />
+                        </FormControl>
+                        <FormMessage className="text-red-400" />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="lastName"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel className="text-white/70">Last Name</FormLabel>
+                        <FormControl>
+                          <Input
+                            placeholder="Doe"
+                            {...field}
+                            className="glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 border-0"
+                          />
+                        </FormControl>
+                        <FormMessage className="text-red-400" />
+                      </FormItem>
+                    )}
                   />
                 </div>
-                <div>
-                  <label className="block text-white/70 text-sm mb-2">Last Name</label>
-                  <input
-                    type="text"
-                    className="w-full glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300"
-                    placeholder="Doe"
-                  />
-                </div>
-              </div>
 
-              <div>
-                <label className="block text-white/70 text-sm mb-2">Email</label>
-                <input
-                  type="email"
-                  className="w-full glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300"
-                  placeholder="john@example.com"
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white/70">Email</FormLabel>
+                      <FormControl>
+                        <Input
+                          type="email"
+                          placeholder="john@example.com"
+                          {...field}
+                          className="glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 border-0"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <div>
-                <label className="block text-white/70 text-sm mb-2">Subject</label>
-                <input
-                  type="text"
-                  className="w-full glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300"
-                  placeholder="Project Inquiry"
+                <FormField
+                  control={form.control}
+                  name="subject"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white/70">Subject</FormLabel>
+                      <FormControl>
+                        <Input
+                          placeholder="Project Inquiry"
+                          {...field}
+                          className="glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 border-0"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <div>
-                <label className="block text-white/70 text-sm mb-2">Message</label>
-                <textarea
-                  rows={5}
-                  className="w-full glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 resize-none"
-                  placeholder="Tell us about your project..."
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="text-white/70">Message</FormLabel>
+                      <FormControl>
+                        <Textarea
+                          rows={5}
+                          placeholder="Tell us about your project..."
+                          {...field}
+                          className="glass-strong rounded-xl px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-purple-400 transition-all duration-300 resize-none border-0"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400" />
+                    </FormItem>
+                  )}
                 />
-              </div>
 
-              <button
-                type="submit"
-                className="w-full glass-strong rounded-xl px-6 py-4 text-white font-semibold hover:scale-105 transition-all duration-300 glow flex items-center justify-center gap-2 group"
-              >
-                Send Message
-                <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-              </button>
-            </form>
+                <Button
+                  type="submit"
+                  disabled={form.formState.isSubmitting}
+                  className="w-full glass-strong rounded-xl px-6 py-4 text-white font-semibold hover:scale-105 transition-all duration-300 glow flex items-center justify-center gap-2 group border-0 bg-transparent"
+                >
+                  {form.formState.isSubmitting ? (
+                    <>
+                      <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white"></div>
+                      Sending...
+                    </>
+                  ) : (
+                    <>
+                      Send Message
+                      <Send className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
+                    </>
+                  )}
+                </Button>
+              </form>
+            </Form>
           </div>
         </div>
       </div>
