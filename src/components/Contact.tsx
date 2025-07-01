@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
 import { useForm } from 'react-hook-form';
@@ -9,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Textarea } from '@/components/ui/textarea';
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { useToast } from '@/hooks/use-toast';
+import { useAdmin } from '../contexts/AdminContext';
 
 const contactFormSchema = z.object({
   firstName: z.string().min(2, 'First name must be at least 2 characters'),
@@ -22,6 +22,7 @@ type ContactFormValues = z.infer<typeof contactFormSchema>;
 
 const Contact = () => {
   const { toast } = useToast();
+  const { content } = useAdmin();
   
   const form = useForm<ContactFormValues>({
     resolver: zodResolver(contactFormSchema),
@@ -85,7 +86,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="text-white/70 text-sm">Email</div>
-                  <div className="text-white font-medium">hello@glazedflow.com</div>
+                  <div className="text-white font-medium">{content.contact.email}</div>
                 </div>
               </div>
 
@@ -95,7 +96,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="text-white/70 text-sm">Phone</div>
-                  <div className="text-white font-medium">+1 (555) 123-4567</div>
+                  <div className="text-white font-medium">{content.contact.phone}</div>
                 </div>
               </div>
 
@@ -105,7 +106,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <div className="text-white/70 text-sm">Location</div>
-                  <div className="text-white font-medium">San Francisco, CA</div>
+                  <div className="text-white font-medium">{content.contact.location}</div>
                 </div>
               </div>
             </div>

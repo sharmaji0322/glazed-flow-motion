@@ -7,22 +7,27 @@ import Services from '../components/Services';
 import Portfolio from '../components/Portfolio';
 import Contact from '../components/Contact';
 import Footer from '../components/Footer';
+import AdminPanel from '../components/AdminPanel';
+import { AdminProvider } from '../contexts/AdminContext';
 import { Toaster } from '@/components/ui/toaster';
 
 const Index = () => {
   return (
-    <div className="min-h-screen overflow-x-hidden">
-      <AnimatedBackground />
-      <Navigation />
-      <main>
-        <Hero />
-        <Services />
-        <Portfolio />
-        <Contact />
-      </main>
-      <Footer />
-      <Toaster />
-    </div>
+    <AdminProvider>
+      <div className="min-h-screen overflow-x-hidden">
+        <AnimatedBackground />
+        <Navigation />
+        <main>
+          <Hero />
+          <Services />
+          <Portfolio />
+          <Contact />
+        </main>
+        <Footer />
+        <AdminPanel />
+        <Toaster />
+      </div>
+    </AdminProvider>
   );
 };
 
