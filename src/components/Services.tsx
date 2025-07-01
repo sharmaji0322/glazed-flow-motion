@@ -1,44 +1,50 @@
 
 import React from 'react';
-import { Palette, Code, Smartphone, Globe, Zap, Shield } from 'lucide-react';
+import { Code, Palette, Smartphone, Database, Zap, Globe } from 'lucide-react';
 
 const Services = () => {
-  const services = [
+  const skills = [
     {
-      icon: Palette,
-      title: 'UI/UX Design',
-      description: 'Stunning visual designs with glassmorphism aesthetics and modern user experiences.',
+      icon: Code,
+      title: 'Frontend Development',
+      description: 'React, TypeScript, Next.js, and modern JavaScript frameworks for building responsive web applications.',
+      technologies: ['React', 'TypeScript', 'Next.js', 'Tailwind CSS'],
       color: 'purple'
     },
     {
-      icon: Code,
-      title: 'Web Development',
-      description: 'Custom web applications built with cutting-edge technologies and smooth animations.',
+      icon: Database,
+      title: 'Backend Development',
+      description: 'Node.js, Express, and database design for robust server-side applications and APIs.',
+      technologies: ['Node.js', 'Express', 'PostgreSQL', 'MongoDB'],
       color: 'blue'
     },
     {
-      icon: Smartphone,
-      title: 'Mobile First',
-      description: 'Responsive designs that look perfect on all devices with fluid interactions.',
+      icon: Palette,
+      title: 'UI/UX Design',
+      description: 'User-centered design approach with modern aesthetics and seamless user experiences.',
+      technologies: ['Figma', 'Adobe XD', 'Prototyping', 'Design Systems'],
       color: 'pink'
     },
     {
-      icon: Globe,
-      title: 'Global Reach',
-      description: 'Optimized for worldwide audiences with fast loading times and accessibility.',
+      icon: Smartphone,
+      title: 'Mobile Development',
+      description: 'Cross-platform mobile apps using React Native and progressive web app technologies.',
+      technologies: ['React Native', 'PWA', 'Mobile UI', 'App Store'],
       color: 'indigo'
     },
     {
-      icon: Zap,
-      title: 'Performance',
-      description: 'Lightning-fast websites with optimized code and efficient resource management.',
-      color: 'yellow'
+      icon: Globe,
+      title: 'Web Performance',
+      description: 'Optimization techniques for fast-loading, SEO-friendly, and accessible web applications.',
+      technologies: ['SEO', 'Performance', 'Accessibility', 'Analytics'],
+      color: 'green'
     },
     {
-      icon: Shield,
-      title: 'Security',
-      description: 'Enterprise-grade security measures to protect your data and user privacy.',
-      color: 'green'
+      icon: Zap,
+      title: 'DevOps & Deployment',
+      description: 'CI/CD pipelines, cloud deployment, and modern development workflow automation.',
+      technologies: ['Docker', 'AWS', 'GitHub Actions', 'Vercel'],
+      color: 'yellow'
     }
   ];
 
@@ -55,52 +61,57 @@ const Services = () => {
   };
 
   return (
-    <section id="services" className="py-20 px-4">
+    <section id="skills" className="py-20 px-4">
       <div className="max-w-6xl mx-auto">
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 animate-fade-in-up">
-            Our <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Services</span>
+            Skills & <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">Expertise</span>
           </h2>
           <p className="text-xl text-white/70 max-w-2xl mx-auto animate-fade-in-up" style={{ animationDelay: '0.2s' }}>
-            Discover our comprehensive range of services designed to bring your digital vision to life
+            Here's what I bring to the table - a comprehensive skill set for modern web development
           </p>
         </div>
 
-        {/* Services Grid */}
+        {/* Skills Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => {
-            const Icon = service.icon;
+          {skills.map((skill, index) => {
+            const Icon = skill.icon;
             return (
               <div
-                key={service.title}
+                key={skill.title}
                 className="glass rounded-2xl p-8 hover:scale-105 transition-all duration-500 group cursor-pointer animate-fade-in-up"
                 style={{ animationDelay: `${0.1 * index}s` }}
               >
                 <div className={`w-16 h-16 rounded-2xl glass-strong mb-6 flex items-center justify-center group-hover:animate-pulse-glow transition-all duration-300`}>
-                  <Icon className={`w-8 h-8 transition-all duration-300 ${getColorClasses(service.color)}`} />
+                  <Icon className={`w-8 h-8 transition-all duration-300 ${getColorClasses(skill.color)}`} />
                 </div>
                 
                 <h3 className="text-2xl font-bold text-white mb-4 group-hover:text-purple-300 transition-colors duration-300">
-                  {service.title}
+                  {skill.title}
                 </h3>
                 
-                <p className="text-white/70 leading-relaxed group-hover:text-white/90 transition-colors duration-300">
-                  {service.description}
+                <p className="text-white/70 leading-relaxed mb-4 group-hover:text-white/90 transition-colors duration-300">
+                  {skill.description}
                 </p>
+
+                {/* Technologies */}
+                <div className="flex flex-wrap gap-2">
+                  {skill.technologies.map((tech) => (
+                    <span
+                      key={tech}
+                      className="glass-strong px-3 py-1 rounded-full text-sm text-white/60 group-hover:text-white/80 transition-colors duration-300"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
 
                 {/* Hover effect border */}
                 <div className="absolute inset-0 rounded-2xl border-2 border-transparent group-hover:border-purple-400/30 transition-all duration-300 pointer-events-none"></div>
               </div>
             );
           })}
-        </div>
-
-        {/* Bottom CTA */}
-        <div className="text-center mt-16 animate-fade-in-up" style={{ animationDelay: '0.8s' }}>
-          <button className="glass-strong rounded-2xl px-8 py-4 text-white font-semibold text-lg hover:scale-105 transition-all duration-300 glow">
-            View All Services
-          </button>
         </div>
       </div>
     </section>

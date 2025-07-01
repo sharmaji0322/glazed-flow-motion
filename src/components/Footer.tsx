@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Heart } from 'lucide-react';
+import { Heart, Mail, Phone, MapPin } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -10,13 +10,14 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="text-2xl font-bold text-white mb-4">
-              Glazed<span className="text-purple-300">Flow</span>
+              Alex<span className="text-purple-300">Johnson</span>
             </div>
             <p className="text-white/70 mb-6 max-w-md">
-              Creating beautiful, modern web experiences with glassmorphism design and cutting-edge animations.
+              Full-stack developer passionate about creating beautiful, functional web applications. 
+              Let's build something amazing together.
             </p>
             <div className="flex gap-4">
-              {['Twitter', 'LinkedIn', 'GitHub'].map((social) => (
+              {['GitHub', 'LinkedIn', 'Twitter'].map((social) => (
                 <button
                   key={social}
                   className="glass p-2 rounded-xl hover:scale-110 transition-all duration-300 text-white/70 hover:text-white text-sm"
@@ -29,9 +30,9 @@ const Footer = () => {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Quick Links</h4>
+            <h4 className="text-white font-semibold mb-4">Navigation</h4>
             <div className="space-y-2">
-              {['Home', 'About', 'Services', 'Portfolio', 'Contact'].map((link) => (
+              {['Home', 'About', 'Skills', 'Portfolio', 'Contact'].map((link) => (
                 <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
@@ -43,18 +44,22 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Services */}
+          {/* Contact Info */}
           <div>
-            <h4 className="text-white font-semibold mb-4">Services</h4>
-            <div className="space-y-2">
-              {['UI/UX Design', 'Web Development', 'Mobile Apps', 'Consulting'].map((service) => (
-                <div
-                  key={service}
-                  className="text-white/70 hover:text-white transition-colors duration-300 cursor-pointer"
-                >
-                  {service}
-                </div>
-              ))}
+            <h4 className="text-white font-semibold mb-4">Get in Touch</h4>
+            <div className="space-y-3">
+              <div className="flex items-center gap-3 text-white/70 text-sm">
+                <Mail className="w-4 h-4" />
+                <span>alex@example.com</span>
+              </div>
+              <div className="flex items-center gap-3 text-white/70 text-sm">
+                <Phone className="w-4 h-4" />
+                <span>+1 (555) 123-4567</span>
+              </div>
+              <div className="flex items-center gap-3 text-white/70 text-sm">
+                <MapPin className="w-4 h-4" />
+                <span>San Francisco, CA</span>
+              </div>
             </div>
           </div>
         </div>
@@ -62,10 +67,10 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-white/70 text-sm">
-            © 2024 GlazedFlow. All rights reserved.
+            © 2024 Alex Johnson. All rights reserved.
           </div>
           <div className="flex items-center gap-1 text-white/70 text-sm">
-            Made with <Heart className="w-4 h-4 text-red-400 animate-pulse" /> by GlazedFlow Team
+            Built with <Heart className="w-4 h-4 text-red-400 animate-pulse" /> and modern web technologies
           </div>
         </div>
       </div>
