@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Brand */}
           <div className="col-span-1 md:col-span-2">
             <div className="text-2xl font-bold text-white mb-4">
-              Alex<span className="text-purple-300">Johnson</span>
+              Rohit<span className="text-purple-300">Sharma</span>
             </div>
             <p className="text-white/70 mb-6 max-w-md">
               Full-stack developer passionate about creating beautiful, functional web applications. 
@@ -50,7 +50,7 @@ const Footer = () => {
             <div className="space-y-3">
               <div className="flex items-center gap-3 text-white/70 text-sm">
                 <Mail className="w-4 h-4" />
-                <span>alex@example.com</span>
+                <span>rohit@example.com</span>
               </div>
               <div className="flex items-center gap-3 text-white/70 text-sm">
                 <Phone className="w-4 h-4" />
@@ -67,7 +67,7 @@ const Footer = () => {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/10 flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="text-white/70 text-sm">
-            © 2024 Alex Johnson. All rights reserved.
+            © 2024 Rohit Sharma. All rights reserved.
           </div>
           <div className="flex items-center gap-1 text-white/70 text-sm">
             Built with <Heart className="w-4 h-4 text-red-400 animate-pulse" /> and modern web technologies

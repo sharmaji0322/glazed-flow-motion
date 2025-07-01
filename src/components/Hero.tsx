@@ -17,7 +17,7 @@ const Hero = () => {
           Hi, I'm
           <br />
           <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-blue-400 bg-clip-text text-transparent">
-            Alex Johnson
+            Rohit Sharma
           </span>
         </h1>
 
